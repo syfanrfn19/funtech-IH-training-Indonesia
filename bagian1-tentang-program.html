@@ -104,7 +104,7 @@
   <div id="sec-cta" style="margin: 50px 0 20px;">
     <span class="kicker">📝 Kuis Bagian 1</span>
     <h2>Uji Pemahaman Anda</h2>
-    <p>Jawab kedelapan pertanyaan berikut. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 6 dari 8 benar) untuk membuka Bagian 2.</p>
+    <p>Jawab kedelapan pertanyaan berikut. Anda perlu mendapat <strong>80% atau lebih</strong> (minimal 7 dari 8 benar) untuk membuka Bagian 2.</p>
   </div>
 
   <div class="quiz-box" id="quiz">
@@ -232,7 +232,7 @@ function submitQuiz(){
   const total = questions.length;
   const pct = Math.round((correct/total)*100);
   const resultEl = document.getElementById('quizResult');
-  const passed = pct >= 70;
+  const passed = pct >= 80;
   resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus! Bagian 2 telah terbuka.' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
   document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }

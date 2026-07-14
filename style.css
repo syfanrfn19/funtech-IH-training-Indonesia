@@ -45,7 +45,6 @@
   --ink: #F3F1E7;
   --ink-soft: #C2C4D6;
   --line: #383C54;
-  --lime-ink: #EAF3B0;
 
   --blue-soft: rgba(74,99,231,0.22);
   --blue-soft-text: #C7D2FF;
@@ -251,14 +250,17 @@ article h4{ font-size:1.05rem; }
 .compare-col li{ margin-bottom: 10px; color: var(--ink-soft); }
 
 .principle-list{ counter-reset: p; list-style:none; padding:0; margin: 24px 0; display:flex; flex-direction:column; gap:18px; }
-.principle-list li{ counter-increment:p; background: var(--paper); border:1px solid var(--line); border-radius: var(--radius-md); padding: 18px 20px 18px 66px; position:relative; box-shadow: var(--shadow-card); }
-.principle-list li::before{
+.principle-list > li{ counter-increment:p; background: var(--paper); border:1px solid var(--line); border-radius: var(--radius-md); padding: 18px 20px 18px 66px; position:relative; box-shadow: var(--shadow-card); }
+.principle-list > li::before{
   content: counter(p); position:absolute; left:18px; top:18px;
   font-family: var(--font-display); font-weight:800; color:#fff;
   width:34px; height:34px; border-radius:50%; background: var(--blue);
   display:flex; align-items:center; justify-content:center;
 }
-.principle-list li h4{ margin: 0 0 6px; }
+.principle-list > li h4{ margin: 0 0 6px; }
+.principle-list ul{ list-style:none; padding-left:0; margin: 14px 0 0; display:flex; flex-direction:column; gap:8px; }
+.principle-list ul li{ background:none; border:none; box-shadow:none; padding:0; }
+.principle-list ul li::before{ display:none; }
 
 .scenario-grid{ display:grid; grid-template-columns: 1fr; gap: 14px; margin: 20px 0; }
 .scenario{ background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 18px 20px; box-shadow: var(--shadow-card); }
@@ -334,7 +336,7 @@ table.praise-table td.yes{ color: #4E7A0C; font-weight:700; }
 [data-theme="dark"] .lesson-num{ color: var(--blue-soft-text); }
 .lesson-text{ font-weight:700; font-size:.96rem; }
 
-.module-hero-img{ width:100%; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); margin: 18px 0 8px; display:block; object-fit:cover; max-height: 320px; }
+.module-hero-img{ width:100%; height:auto; max-height: 460px; border-radius: var(--radius-lg); box-shadow: var(--shadow-card); margin: 18px 0 8px; display:block; object-fit: contain; background: var(--cream-deep); }
 .img-caption{ text-align:center; font-size:.78rem; color: var(--ink-soft); margin: 0 0 20px; font-style: italic; }
 
 .age-tip{

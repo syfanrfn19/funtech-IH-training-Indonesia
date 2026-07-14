@@ -42,7 +42,7 @@
     <div class="flow-icon">🔎</div>
     <div class="flow-body">
       <h3>Ringkasan & Kenapa Penting</h3>
-      <p>Modul ini adalah titik transisi besar: dari Scratch Junior ke animasi gambar bebas di Brush Ninja (gaya stop-motion), lalu kembali ke logika pemrograman untuk membangun game yang jauh lebih kompleks dibanding Modul 2 — hingga bisa dimainkan di ponsel.</p>
+      <p>Modul ini adalah titik transisi besar: dari Scratch Junior ke animasi gambar bebas di Flipanim (gaya stop-motion), lalu kembali ke logika pemrograman untuk membangun game yang jauh lebih kompleks dibanding Modul 2 — hingga bisa dimainkan di ponsel.</p>
       <div class="callout callout-info"><span class="callout-label">Kenapa modul ini penting</span><p>Ini biasanya menjadi momen paling berkesan bagi anak — karya mereka mulai terasa seperti "game atau video sungguhan", bukan lagi latihan. Motivasi yang terbangun di sini penting untuk membawa energi ke dua modul terakhir.</p></div>
     </div>
   </div>
@@ -51,7 +51,7 @@
     <div class="flow-icon">🌟</div>
     <div class="flow-body">
       <h3>Apa yang Akan Dikuasai Anak & Penerapannya</h3>
-      <p>Anak membuat animasi frame demi frame sederhana di Brush Ninja, lalu menerapkan logika urutan dan pengulangan dari Modul 1–2 untuk membangun game sendiri yang bisa dimainkan.</p>
+      <p>Anak membuat animasi frame demi frame sederhana di Flipanim, lalu menerapkan logika urutan dan pengulangan dari Modul 1–2 untuk membangun game sendiri yang bisa dimainkan.</p>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
       <h3>Yang Perlu Anda Kuasai Sebagai Tutor</h3>
       <p>Sebelum mengajar modul ini, pastikan Anda 100% percaya diri dengan hal-hal berikut:</p>
       <ul class="confidence-list">
-        <li><span class="chk">✓</span> Interface Brush Ninja — kanvas, onion skin (lapisan bayangan gambar sebelumnya), dan tombol putar ulang</li>
+        <li><span class="chk">✓</span> Interface Flipanim — kanvas, onion skin (lapisan bayangan gambar sebelumnya), dan tombol putar ulang</li>
         <li><span class="chk">✓</span> Cara membantu debugging sederhana saat game buatan anak tidak berjalan sesuai rencana</li>
         <li><span class="chk">✓</span> Contoh kalimat "Tidak Apa-apa!" dari Bagian 2 untuk saat animasi atau game tidak berhasil di percobaan pertama</li>
         <li><span class="chk">✓</span> Cara kerja fitur "mainkan di telepon" pada pelajaran terakhir modul ini</li>
@@ -89,7 +89,7 @@
       </div>
       <div class="callout callout-tip" style="margin-top:20px;">
         <span class="callout-label">🏆 Hasil Modul</span>
-        <p>Sebagai hasil modul ini, anak-anak belajar membuat animasi di program Brush Ninja, kemudian menciptakan video nyata dari animasi tersebut. Mereka akan melanjutkan pendalaman dalam pemrograman, menciptakan permainan lain!</p>
+        <p>Sebagai hasil modul ini, anak-anak belajar membuat animasi di program Flipanim, kemudian menciptakan video nyata dari animasi tersebut. Mereka akan melanjutkan pendalaman dalam pemrograman, menciptakan permainan lain!</p>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@
   <div id="sec-cta" style="margin: 50px 0 20px;">
     <span class="kicker">📝 Kuis Modul 06</span>
     <h2>Uji Pemahaman Anda</h2>
-    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>80% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
   </div>
 
   <div class="quiz-box" id="quiz">
@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="quiz-q" data-answer="1">
-      <p class="qtext">2. "Onion skin" pada Brush Ninja berfungsi untuk...</p>
+      <p class="qtext">2. "Onion skin" pada Flipanim berfungsi untuk...</p>
       <div class="quiz-opts">
         <div class="quiz-opt" data-i="0">Mewarnai latar belakang</div>
         <div class="quiz-opt" data-i="1">Menampilkan lapisan bayangan gambar sebelumnya saat membuat animasi frame demi frame</div>
@@ -197,7 +197,7 @@ function submitQuiz(){
   const total = questions.length;
   const pct = Math.round((correct/total)*100);
   const resultEl = document.getElementById('quizResult');
-  const passed = pct >= 70;
+  const passed = pct >= 80;
   resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
   document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }

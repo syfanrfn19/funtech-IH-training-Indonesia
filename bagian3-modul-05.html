@@ -97,7 +97,7 @@
   <div id="sec-cta" style="margin: 50px 0 20px;">
     <span class="kicker">📝 Kuis Modul 05</span>
     <h2>Uji Pemahaman Anda</h2>
-    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>80% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
   </div>
 
   <div class="quiz-box" id="quiz">
@@ -197,7 +197,7 @@ function submitQuiz(){
   const total = questions.length;
   const pct = Math.round((correct/total)*100);
   const resultEl = document.getElementById('quizResult');
-  const passed = pct >= 70;
+  const passed = pct >= 80;
   resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
   document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
