@@ -18,9 +18,7 @@
       </div>
     </div>
     <div class="topbar-nav">
-      <a href="index.html" class="back">Dasbor</a>
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Ganti tema">🌙</button>
-    </div>
+      <a href="index.html" class="back">Dasbor</a>    </div>
   </div>
 </div>
 
@@ -193,12 +191,6 @@
 <footer>© 2026 Kodland · Materi pelatihan tutor internal — tidak untuk distribusi eksternal.</footer>
 
 <script>
-function toggleTheme(){
-  const el = document.documentElement;
-  const isDark = el.getAttribute('data-theme') === 'dark';
-  el.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
-}
 document.querySelectorAll('.quiz-q').forEach(q=>{
   const opts = q.querySelector('.quiz-opts');
   const children = Array.from(opts.children);

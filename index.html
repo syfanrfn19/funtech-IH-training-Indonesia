@@ -17,9 +17,7 @@
         <small>Pelatihan Tutor</small>
       </div>
     </div>
-    <div class="topbar-nav">
-      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Ganti tema">🌙</button>
-    </div>
+    <div class="topbar-nav">    </div>
   </div>
 </div>
 
@@ -87,12 +85,6 @@
 <footer>© 2026 Kodland. Dirancang untuk keperluan pelatihan tutor internal. Materi ini adalah milik eksklusif Kodland dan tidak boleh didistribusikan secara eksternal.</footer>
 
 <script>
-function toggleTheme(){
-  const el = document.documentElement;
-  const isDark = el.getAttribute('data-theme') === 'dark';
-  el.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
-}
 </script>
 
 </body>
