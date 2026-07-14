@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FunTech Explorers — Pelatihan Tutor | Kodland</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo-mark">🧭</div>
+      <div>
+        Kodland
+        <small>Pelatihan Tutor</small>
+      </div>
+    </div>
+    <div class="topbar-nav">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Ganti tema">🌙</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">🧩 Program Pelatihan Tutor</span>
+    <h1>FunTech Explorers<br>Kesiapan Tutor Usia 5–7 Tahun</h1>
+    <p class="lede">Selesaikan ketiga bagian pelatihan berikut untuk mempersiapkan diri mengajar kurikulum FunTech Explorers. Setiap bagian diakhiri dengan kuis singkat — nilai <strong>70% atau lebih</strong> diperlukan untuk melanjutkan.</p>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-count">0<span>/3 Bagian selesai</span></div>
+    <div class="trail">
+      <div class="trail-dot"></div><div class="trail-dot"></div><div class="trail-dot"></div>
+      <div class="trail-dot"></div><div class="trail-dot"></div><div class="trail-dot"></div>
+    </div>
+    <a href="bagian1-tentang-program.html" class="btn btn-primary">Mulai Bagian 1 →</a>
+  </div>
+
+  <h2 class="display" style="font-size:1.3rem;">Bagian Pelatihan</h2>
+  <div class="module-list">
+
+    <div class="module-card">
+      <div class="module-num">1</div>
+      <div class="module-body">
+        <span class="module-tag">🧭 Tentang Program</span>
+        <h3>Mengenal FunTech Explorers</h3>
+        <p>Apa itu program ini, tujuan dan filosofi pembelajarannya, cara kurikulum disusun, dan peran Anda sebagai tutor.</p>
+      </div>
+      <a href="bagian1-tentang-program.html" class="btn btn-ghost">Buka →</a>
+    </div>
+
+    <div class="module-card">
+      <div class="module-num">2</div>
+      <div class="module-body">
+        <span class="module-tag">🧠 Pedagogi</span>
+        <h3>Anak yang Anda Ajar — Usia 5–7 Tahun</h3>
+        <p>Cara berpikir, rentang perhatian, dan kebutuhan emosional anak usia dini. Lima prinsip inti mengajar FunTech, plus cara menangani situasi sulit di kelas.</p>
+      </div>
+      <a href="bagian2-pedagogi.html" class="btn btn-ghost">Buka →</a>
+    </div>
+
+    <div class="module-card">
+      <div class="module-num">3</div>
+      <div class="module-body">
+        <span class="module-tag">📚 Kurikulum</span>
+        <h3>Program Kursus FunTech Explorers</h3>
+        <p>Kedelapan modul kursus — tools yang dipakai, apa yang dikuasai anak, dan yang perlu Anda kuasai untuk mengajar tiap modul dengan percaya diri.</p>
+      </div>
+      <a href="bagian3-kurikulum.html" class="btn btn-ghost">Buka →</a>
+    </div>
+
+  </div>
+
+  <div class="cta-final">
+    <span class="eyebrow" style="background:rgba(255,255,255,.2); color:#fff;">🎯 Tahap Akhir</span>
+    <h2>Age-Friendly Test</h2>
+    <p>Setelah menyelesaikan ketiga bagian, uji kesiapan Anda menerapkan pendekatan ramah usia dalam skenario kelas nyata.</p>
+    <a href="age-friendly-test.html" class="btn btn-primary">Lihat Age-Friendly Test →</a>
+  </div>
+
+</div>
+
+<footer>© 2026 Kodland. Dirancang untuk keperluan pelatihan tutor internal. Materi ini adalah milik eksklusif Kodland dan tidak boleh didistribusikan secara eksternal.</footer>
+
+<script>
+function toggleTheme(){
+  const el = document.documentElement;
+  const isDark = el.getAttribute('data-theme') === 'dark';
+  el.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+</script>
+
+</body>
+</html>
