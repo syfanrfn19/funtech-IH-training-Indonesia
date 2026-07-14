@@ -69,13 +69,15 @@
       <h2><span class="num">→</span>Alat & Persyaratan Perangkat</h2>
       <h4>🧰 Program yang Digunakan</h4>
       <div class="tool-row">
-        <div class="tool-chip">📊 Google Slides</div>
         <div class="tool-chip">🐱 ScratchJr</div>
         <div class="tool-chip">💻 Code.org</div>
-        <div class="tool-chip">🗂️ Miro</div>
-        <div class="tool-chip">✏️ Flipanim</div>
+        <div class="tool-chip">📊 Google Slides</div>
         <div class="tool-chip">📄 Documents</div>
+        <div class="tool-chip">🎨 Canva</div>
+        <div class="tool-chip">✏️ Flipanim</div>
+        <div class="tool-chip">🗂️ Miro</div>
       </div>
+      <p style="font-size:.85rem; margin-top:-8px;">ScratchJr dan Code.org dipakai untuk logika & pemrograman blok; Google Slides, Documents, dan Canva untuk literasi dokumen serta desain kreatif; Flipanim untuk animasi frame-by-frame; Miro untuk papan interaktif (drag-and-drop) di pelajaran-pelajaran awal.</p>
 
       <h4>💻 Persyaratan Perangkat Keras</h4>
       <div class="req-grid">
@@ -164,7 +166,7 @@
             <div class="curric-num">06</div>
             <div class="curric-body">
               <h3>🚀 Dari Animasi ke Dunia Permainan</h3>
-              <p>Animasi di Brush Ninja jadi video nyata, lalu game baru yang lebih kompleks.</p>
+              <p>Animasi di Flipanim jadi video nyata, lalu game baru yang lebih kompleks.</p>
             </div>
             <div class="arrow-go">→</div>
           </div>
@@ -202,7 +204,7 @@
   <div id="sec-cta" style="margin: 50px 0 20px;">
     <span class="kicker">📝 Kuis Bagian 3</span>
     <h2>Uji Pemahaman Anda</h2>
-    <p>Jawab keempat pertanyaan berikut. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 3 dari 4 benar) untuk membuka Age-Friendly Test.</p>
+    <p>Jawab kelima pertanyaan berikut. Anda perlu mendapat <strong>80% atau lebih</strong> (minimal 4 dari 5 benar) untuk membuka Age-Friendly Test.</p>
   </div>
 
   <div class="quiz-box" id="quiz">
@@ -240,6 +242,15 @@
         <div class="quiz-opt" data-i="0">Karena wajib menurut peraturan sekolah</div>
         <div class="quiz-opt" data-i="1">Karena perangkat yang tidak memenuhi syarat adalah penyebab paling umum gangguan teknis di awal sesi</div>
         <div class="quiz-opt" data-i="2">Karena tanpa itu siswa tidak bisa login Zoom</div>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">5. Tool mana yang paling tepat dipakai untuk pelajaran desain poster dan kartu pos di Modul 3?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Canva</div>
+        <div class="quiz-opt" data-i="1">Code.org</div>
+        <div class="quiz-opt" data-i="2">Google Sheets</div>
       </div>
     </div>
 
@@ -299,7 +310,7 @@ function submitQuiz(){
   const total = questions.length;
   const pct = Math.round((correct/total)*100);
   const resultEl = document.getElementById('quizResult');
-  const passed = pct >= 70;
+  const passed = pct >= 80;
   resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus! Age-Friendly Test telah terbuka.' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
   document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
