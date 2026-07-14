@@ -94,9 +94,63 @@
     </div>
   </div>
 
+  <div id="sec-cta" style="margin: 50px 0 20px;">
+    <span class="kicker">📝 Kuis Modul 01</span>
+    <h2>Uji Pemahaman Anda</h2>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+  </div>
+
+  <div class="quiz-box" id="quiz">
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1. Di antara pelajaran berikut, mana yang paling tepat digunakan untuk pertama kali memperkenalkan konsep algoritma secara konkret?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Mengenal Grafis Komputer</div>
+        <div class="quiz-opt" data-i="1">Perjalanan dengan Robot — Bermain dengan Keyboard dan Urutan Aksi</div>
+        <div class="quiz-opt" data-i="2">Studio Musik: Menciptakan Melodi</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2. Apa risiko utama jika tutor melewatkan pelajaran "Mengenal Mouse" dan "Mengenal Keyboard" sebelum lanjut ke modul berikutnya?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Anak akan bosan karena terlalu mudah</div>
+        <div class="quiz-opt" data-i="1">Modul berikutnya (berbasis drag-drop & mengetik) akan jauh lebih sulit diikuti</div>
+        <div class="quiz-opt" data-i="2">Tidak ada risiko, karena modul lain tidak bergantung pada ini</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3. Dua pelajaran terakhir modul ini (GIF dan melodi) punya fungsi pedagogis utama sebagai...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Ulangan materi algoritma</div>
+        <div class="quiz-opt" data-i="1">Proyek karya nyata pertama yang membangun rasa pencapaian anak</div>
+        <div class="quiz-opt" data-i="2">Persiapan teknis untuk modul matematika</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">4. "Kota Masa Depan: Tantangan Logis dalam Perjalanan" paling menekankan keterampilan apa?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Pemecahan teka-teki logika berbasis urutan/algoritma</div>
+        <div class="quiz-opt" data-i="1">Mengetik teks panjang</div>
+        <div class="quiz-opt" data-i="2">Membuat presentasi</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">5. Sebagai tutor, hal paling penting yang harus dikuasai sebelum mengajar modul ini adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Rumus matematika dasar</div>
+        <div class="quiz-opt" data-i="1">Cara mendemonstrasikan gerakan mouse/keyboard dan menerjemahkan instruksi jadi cerita fisik konkret</div>
+        <div class="quiz-opt" data-i="2">Navigasi Google Sheets</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">Kirim Jawaban</button>
+    <div id="quizResult"></div>
+    <div id="nextLink" style="margin-top:18px; display:none;">
+      <a href="bagian3-modul-02.html" class="btn btn-pink">Lanjut ke Modul 02 →</a>
+    </div>
+  </div>
+
   <div class="prevnext">
     <a href="bagian3-kurikulum.html"><small>← Sebelumnya</small>Bagian 3 · Ringkasan Kurikulum</a>
-    <a href="bagian3-modul-02.html" class="next"><small>Selanjutnya →</small>Modul 02 · Perjalanan Menyenangkan ke Dunia Pemrograman</a>
+    <a href="bagian3-modul-02.html" class="next"><small>Selanjutnya →</small>Modul 02</a>
   </div>
 
 </div>
@@ -109,6 +163,43 @@ function toggleTheme(){
   const isDark = el.getAttribute('data-theme') === 'dark';
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+});
+function submitQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let correct = 0;
+  questions.forEach(q=>{
+    const answer = q.getAttribute('data-answer');
+    const selected = q.querySelector('.quiz-opt.selected');
+    q.querySelectorAll('.quiz-opt').forEach(o=>{
+      o.classList.remove('correct','incorrect');
+      if(o.getAttribute('data-i') === answer){ o.classList.add('correct'); }
+      else if(o === selected){ o.classList.add('incorrect'); }
+    });
+    if(selected && selected.getAttribute('data-i') === answer){ correct++; }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const resultEl = document.getElementById('quizResult');
+  const passed = pct >= 70;
+  resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
+  document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
 </script>
 

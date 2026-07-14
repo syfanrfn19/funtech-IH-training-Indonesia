@@ -94,9 +94,63 @@
     </div>
   </div>
 
+  <div id="sec-cta" style="margin: 50px 0 20px;">
+    <span class="kicker">📝 Kuis Modul 02</span>
+    <h2>Uji Pemahaman Anda</h2>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+  </div>
+
+  <div class="quiz-box" id="quiz">
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">1. Apa perbedaan mendasar antara Modul 1 dan Modul 2 dari sisi jenis pemrograman yang diperkenalkan?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Modul 2 memakai blok drag-and-drop terstruktur pertama kali, Modul 1 masih permainan fisik/analog</div>
+        <div class="quiz-opt" data-i="1">Modul 1 dan 2 sama persis</div>
+        <div class="quiz-opt" data-i="2">Modul 2 tidak melibatkan logika sama sekali</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2. Konsep "loop" atau pengulangan paling penting dipahami di modul ini karena...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Hanya dipakai sekali di modul ini</div>
+        <div class="quiz-opt" data-i="1">Akan terus dipakai di hampir semua modul berikutnya</div>
+        <div class="quiz-opt" data-i="2">Tidak relevan dengan modul lain</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3. Ketika anak stuck di teka-teki loop, respons tutor yang tepat menurut prinsip Bagian 2 adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Langsung memberi solusi lengkap</div>
+        <div class="quiz-opt" data-i="1">Memberi petunjuk terarah, misalnya bertanya blok mana yang membuat gerakan berulang</div>
+        <div class="quiz-opt" data-i="2">Melewati teka-teki itu</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">4. "Pesta Bentuk di Colorville" dan "Menyelamatkan Galeri Keajaiban" paling menekankan pengembangan...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Ekspresi kreatif lewat warna dan bentuk sambil menerapkan logika</div>
+        <div class="quiz-opt" data-i="1">Kemampuan mengetik cepat</div>
+        <div class="quiz-opt" data-i="2">Presentasi lisan</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">5. Apa yang harus disiapkan tutor sebelum sesi modul ini, selain memahami interface platformnya?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Solusi dari setiap teka-teki utama, agar bisa memberi petunjuk bukan jawaban langsung</div>
+        <div class="quiz-opt" data-i="1">Daftar lagu untuk modul musik</div>
+        <div class="quiz-opt" data-i="2">Rumus Google Sheets</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">Kirim Jawaban</button>
+    <div id="quizResult"></div>
+    <div id="nextLink" style="margin-top:18px; display:none;">
+      <a href="bagian3-modul-03.html" class="btn btn-pink">Lanjut ke Modul 03 →</a>
+    </div>
+  </div>
+
   <div class="prevnext">
     <a href="bagian3-modul-01.html"><small>← Sebelumnya</small>Modul 01 · Menjelajahi Dunia Digital</a>
-    <a href="bagian3-modul-03.html" class="next"><small>Selanjutnya →</small>Modul 03 · Petualangan di Lembah Data</a>
+    <a href="bagian3-modul-03.html" class="next"><small>Selanjutnya →</small>Modul 03</a>
   </div>
 
 </div>
@@ -109,6 +163,43 @@ function toggleTheme(){
   const isDark = el.getAttribute('data-theme') === 'dark';
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+});
+function submitQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let correct = 0;
+  questions.forEach(q=>{
+    const answer = q.getAttribute('data-answer');
+    const selected = q.querySelector('.quiz-opt.selected');
+    q.querySelectorAll('.quiz-opt').forEach(o=>{
+      o.classList.remove('correct','incorrect');
+      if(o.getAttribute('data-i') === answer){ o.classList.add('correct'); }
+      else if(o === selected){ o.classList.add('incorrect'); }
+    });
+    if(selected && selected.getAttribute('data-i') === answer){ correct++; }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const resultEl = document.getElementById('quizResult');
+  const passed = pct >= 70;
+  resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
+  document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
 </script>
 

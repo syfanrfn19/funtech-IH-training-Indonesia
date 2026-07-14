@@ -168,8 +168,8 @@ a{ color: var(--blue); text-decoration: none; }
 }
 .progress-count{ font-family: var(--font-display); font-size: 1.9rem; }
 .progress-count span{ color: var(--ink-soft); font-size: 1rem; font-family: var(--font-body); font-weight:700; }
-.trail{ display:flex; gap:12px; align-items:center; flex:1; min-width: 240px; flex-wrap: wrap; }
-.trail-dot{ width:13px; height:13px; border-radius:50%; background: var(--line); flex: 0 0 auto; }
+.trail{ display:flex; gap:22px; align-items:center; flex:1; min-width: 240px; flex-wrap: wrap; padding-left: 8px; }
+.trail-dot{ width:15px; height:15px; border-radius:50%; background: var(--line); flex: 0 0 auto; box-shadow: 0 0 0 4px var(--paper); }
 .trail-dot.done{ background: linear-gradient(135deg, var(--blue), var(--pink)); }
 
 /* ---------- Bagian list (top-level dashboard cards) ---------- */
@@ -215,8 +215,13 @@ a{ color: var(--blue); text-decoration: none; }
 /* ---------- Content blocks ---------- */
 .kicker{ font-weight:800; color: var(--pink); font-size:.85rem; text-transform:uppercase; letter-spacing:.06em; }
 article section{ margin: 46px 0; }
-article h2{ font-size: 1.6rem; margin-top: 0; }
-article h2 .num{ color: var(--blue); margin-right:8px; }
+article h2{ font-size: 1.6rem; margin-top: 0; display:flex; align-items:center; gap:12px; }
+article h2 .num{
+  color: var(--blue); background: var(--blue-soft);
+  width:38px; height:38px; border-radius:12px; flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+}
 article h4{ font-size:1.05rem; }
 
 .callout{
@@ -301,6 +306,12 @@ table.praise-table td.yes{ color: #4E7A0C; font-weight:700; }
 .tool-row{ display:flex; flex-wrap:wrap; gap:12px; margin: 18px 0 32px; }
 .tool-chip{ background: var(--paper); border:1px solid var(--line); border-radius: 14px; padding: 10px 16px; font-weight:700; font-size:.88rem; display:flex; align-items:center; gap:8px; }
 
+.req-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin: 18px 0 32px; }
+.req-card{ background: var(--paper); border:1px solid var(--line); border-radius: var(--radius-md); padding:16px 18px; box-shadow: var(--shadow-card); display:flex; gap:12px; align-items:flex-start; }
+.req-card .req-icon{ flex:0 0 auto; width:38px; height:38px; border-radius:10px; background: var(--blue-soft); display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.req-card h4{ margin:0 0 4px; font-size:.98rem; }
+.req-card p{ margin:0; font-size:.86rem; }
+
 /* ---------- Project gallery ---------- */
 .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin: 18px 0 30px; }
 .gallery-item{ border-radius: var(--radius-md); overflow:hidden; box-shadow: var(--shadow-card); position:relative; border:1px solid var(--line); }
@@ -336,7 +347,8 @@ table.praise-table td.yes{ color: #4E7A0C; font-weight:700; }
 [data-theme="dark"] .age-tip .callout-label{ color: var(--lime); }
 .age-tip p{ color: var(--ink); opacity: .9; }
 
-.philosophy-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin: 20px 0 34px; }
+.philosophy-grid{ display:grid; grid-template-columns: repeat(2, 1fr); gap:16px; margin: 20px 0 34px; }
+@media (max-width: 560px){ .philosophy-grid{ grid-template-columns: 1fr; } }
 .philosophy-card{ background: var(--paper); border:1px solid var(--line); border-radius: var(--radius-md); padding:20px; box-shadow: var(--shadow-card); }
 .philosophy-card .ic{ font-size:1.6rem; margin-bottom:8px; display:block; }
 .philosophy-card h4{ margin: 0 0 6px; font-size:1rem; }

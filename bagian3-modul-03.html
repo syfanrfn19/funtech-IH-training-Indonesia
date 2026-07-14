@@ -94,9 +94,63 @@
     </div>
   </div>
 
+  <div id="sec-cta" style="margin: 50px 0 20px;">
+    <span class="kicker">📝 Kuis Modul 03</span>
+    <h2>Uji Pemahaman Anda</h2>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+  </div>
+
+  <div class="quiz-box" id="quiz">
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1. Kenapa modul ini disebut bersifat "meta" terhadap modul-modul lain?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Karena tidak berhubungan dengan modul lain</div>
+        <div class="quiz-opt" data-i="1">Karena fondasi navigasi & keamanan digitalnya mendasari cara anak berinteraksi di semua modul berikutnya</div>
+        <div class="quiz-opt" data-i="2">Karena hanya berisi teori tanpa praktik</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">2. Metafora paling tepat untuk menjelaskan folder ke anak usia 5-7 tahun adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">"Folder itu seperti kotak mainan, file adalah mainannya"</div>
+        <div class="quiz-opt" data-i="1">Definisi teknis sistem direktori hierarkis</div>
+        <div class="quiz-opt" data-i="2">Diagram alur data biner</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">3. Pelajaran "Detektif Informasi" paling berkaitan dengan keterampilan...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Dasar mencari dan mengevaluasi informasi di web</div>
+        <div class="quiz-opt" data-i="1">Membuat animasi karakter</div>
+        <div class="quiz-opt" data-i="2">Operasi hitung dasar</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">4. Tiga proyek kreatif yang dihasilkan di akhir modul ini adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Game, lagu, dan presentasi</div>
+        <div class="quiz-opt" data-i="1">Komik, poster, dan kartu pos</div>
+        <div class="quiz-opt" data-i="2">Portofolio, GIF, dan melodi</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">5. Kompetensi tutor yang paling krusial untuk modul ini adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Familiar rumus Google Sheets</div>
+        <div class="quiz-opt" data-i="1">Tahu situs/alat pencarian yang aman untuk anak dan bahasa sederhana menjelaskan internet</div>
+        <div class="quiz-opt" data-i="2">Menguasai debugging game kompleks</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">Kirim Jawaban</button>
+    <div id="quizResult"></div>
+    <div id="nextLink" style="margin-top:18px; display:none;">
+      <a href="bagian3-modul-04.html" class="btn btn-pink">Lanjut ke Modul 04 →</a>
+    </div>
+  </div>
+
   <div class="prevnext">
     <a href="bagian3-modul-02.html"><small>← Sebelumnya</small>Modul 02 · Perjalanan Menyenangkan ke Dunia Pemrograman</a>
-    <a href="bagian3-modul-04.html" class="next"><small>Selanjutnya →</small>Modul 04 · Pencipta Tekno: Membangun, Menjelajah, Mencipta</a>
+    <a href="bagian3-modul-04.html" class="next"><small>Selanjutnya →</small>Modul 04</a>
   </div>
 
 </div>
@@ -109,6 +163,43 @@ function toggleTheme(){
   const isDark = el.getAttribute('data-theme') === 'dark';
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+});
+function submitQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let correct = 0;
+  questions.forEach(q=>{
+    const answer = q.getAttribute('data-answer');
+    const selected = q.querySelector('.quiz-opt.selected');
+    q.querySelectorAll('.quiz-opt').forEach(o=>{
+      o.classList.remove('correct','incorrect');
+      if(o.getAttribute('data-i') === answer){ o.classList.add('correct'); }
+      else if(o === selected){ o.classList.add('incorrect'); }
+    });
+    if(selected && selected.getAttribute('data-i') === answer){ correct++; }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const resultEl = document.getElementById('quizResult');
+  const passed = pct >= 70;
+  resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
+  document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
 </script>
 

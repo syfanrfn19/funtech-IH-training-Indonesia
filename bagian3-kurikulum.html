@@ -26,13 +26,6 @@
 
 <div class="wrap-narrow">
 
-  <div class="section-nav">
-    <a href="#sec0">0 · Ringkasan</a>
-    <a href="#sec1">1 · Alat & Perangkat</a>
-    <a href="#sec2">2 · 8 Modul Kursus</a>
-    <a href="#sec-cta" class="cta">→ Kuis</a>
-  </div>
-
   <div class="breadcrumb-steps">
     <span class="step"><a href="bagian2-pedagogi.html">🧠 Bagian 2 · Pedagogi</a></span>
     <span class="arrow">→</span>
@@ -48,7 +41,7 @@
   <article>
 
     <section id="sec0">
-      <h2><span class="num">0</span>Ringkasan Kursus</h2>
+      <h2><span class="num">→</span>Ringkasan Kursus</h2>
       <div class="callout callout-info">
         <span class="callout-label">🎯 Tujuan Umum Kursus</span>
         <p>Membantu siswa memperoleh keterampilan literasi komputer (menggunakan keyboard dan mouse, memahami komputer pribadi, browser, dan dasar-dasar keamanan internet), serta menguasai alat kreativitas digital, membentuk keterampilan dasar pemrograman blok, dan mengembangkan berpikir kreatif dan kritis.</p>
@@ -73,7 +66,7 @@
     </section>
 
     <section id="sec1">
-      <h2><span class="num">1</span>Alat & Persyaratan Perangkat</h2>
+      <h2><span class="num">→</span>Alat & Persyaratan Perangkat</h2>
       <h4>🧰 Program yang Digunakan</h4>
       <div class="tool-row">
         <div class="tool-chip">📊 Google Slides</div>
@@ -85,13 +78,13 @@
       </div>
 
       <h4>💻 Persyaratan Perangkat Keras</h4>
-      <div class="callout callout-tip">
-        <p>🖱️ Laptop atau komputer, keyboard dan mouse<br>
-        🌐 Koneksi internet stabil minimal 10 Mb/dtk<br>
-        💾 RAM 4 gigabyte<br>
-        🧭 Browser Google Chrome terinstal<br>
-        📹 Zoom terinstal<br>
-        🖥️ Sistem operasi: Windows 10+, Mac OS X 10.9, 10.10, 10.11, dan lebih tinggi</p>
+      <div class="req-grid">
+        <div class="req-card"><div class="req-icon">🖱️</div><div><h4>Perangkat</h4><p>Laptop atau komputer, keyboard dan mouse (bukan tablet/HP)</p></div></div>
+        <div class="req-card"><div class="req-icon">🌐</div><div><h4>Internet</h4><p>Koneksi stabil minimal 10 Mb/dtk</p></div></div>
+        <div class="req-card"><div class="req-icon">💾</div><div><h4>RAM</h4><p>Minimal 4 gigabyte</p></div></div>
+        <div class="req-card"><div class="req-icon">🧭</div><div><h4>Browser</h4><p>Google Chrome terinstal</p></div></div>
+        <div class="req-card"><div class="req-icon">📹</div><div><h4>Aplikasi</h4><p>Zoom terinstal</p></div></div>
+        <div class="req-card"><div class="req-icon">🖥️</div><div><h4>Sistem Operasi</h4><p>Windows 10+ atau Mac OS X 10.9 ke atas</p></div></div>
       </div>
       <div class="callout callout-warn">
         <span class="callout-label">⚠️ Sebelum sesi dimulai</span>
@@ -100,7 +93,7 @@
     </section>
 
     <section id="sec2">
-      <h2><span class="num">2</span>Delapan Modul Kursus</h2>
+      <h2><span class="num">→</span>Delapan Modul Kursus</h2>
       <p>Kurikulum ini tersusun dari delapan modul berurutan. Setiap modul membangun di atas keterampilan modul sebelumnya sambil mengenalkan alat atau konsep baru. <strong>Klik tiap modul</strong> untuk melihat penjelasan lengkap — kenapa penting, apa yang dikuasai anak, dan yang perlu Anda kuasai sebelum mengajarkannya.</p>
 
       <div class="curric-grid">
@@ -273,6 +266,15 @@ function toggleTheme(){
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
 }
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
 document.querySelectorAll('.quiz-q').forEach(q=>{
   q.querySelectorAll('.quiz-opt').forEach(opt=>{
     opt.addEventListener('click', ()=>{

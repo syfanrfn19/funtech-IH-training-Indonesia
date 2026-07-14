@@ -94,9 +94,63 @@
     </div>
   </div>
 
+  <div id="sec-cta" style="margin: 50px 0 20px;">
+    <span class="kicker">📝 Kuis Modul 04</span>
+    <h2>Uji Pemahaman Anda</h2>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+  </div>
+
+  <div class="quiz-box" id="quiz">
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1. Kenapa penguasaan interface Scratch Junior oleh tutor sangat krusial di modul ini?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Karena Scratch Junior hanya dipakai sekali dan tidak penting</div>
+        <div class="quiz-opt" data-i="1">Karena Scratch Junior dipakai lagi di Modul 5 dan mendasari Modul 6, jadi fondasinya harus kuat</div>
+        <div class="quiz-opt" data-i="2">Karena Scratch Junior lebih sulit dari Google Sheets</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2. Sebelum mengajar pelajaran Scratch Junior, apa yang WAJIB dilakukan tutor menurut materi ini?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Membaca teori animasi</div>
+        <div class="quiz-opt" data-i="1">Mencoba sendiri setiap pelajaran Scratch Junior sebelum mengajar</div>
+        <div class="quiz-opt" data-i="2">Menghafal seluruh kode warna blok</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3. "Membangun Peternakan" dan "Terbang dengan Roket" pada dasarnya melatih anak untuk...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Mengetik dokumen panjang</div>
+        <div class="quiz-opt" data-i="1">Membangun scene dan menggerakkan karakter dengan blok Scratch Junior</div>
+        <div class="quiz-opt" data-i="2">Operasi hitung dasar</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">4. Pelajaran "Kekuatan Kata di Google Docs" memperkenalkan keterampilan apa yang berbeda dari Scratch Junior?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Mengetik dan mengedit teks dasar</div>
+        <div class="quiz-opt" data-i="1">Animasi frame-by-frame</div>
+        <div class="quiz-opt" data-i="2">Pengulangan/loop</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">5. Jika tutor ragu-ragu saat mendemonstrasikan interface Scratch Junior di depan siswa, dampak paling mungkin adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Tidak ada dampak berarti</div>
+        <div class="quiz-opt" data-i="1">Anak ikut bingung karena mereka meniru persis apa yang ditunjukkan</div>
+        <div class="quiz-opt" data-i="2">Anak akan otomatis mencari solusi sendiri</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">Kirim Jawaban</button>
+    <div id="quizResult"></div>
+    <div id="nextLink" style="margin-top:18px; display:none;">
+      <a href="bagian3-modul-05.html" class="btn btn-pink">Lanjut ke Modul 05 →</a>
+    </div>
+  </div>
+
   <div class="prevnext">
     <a href="bagian3-modul-03.html"><small>← Sebelumnya</small>Modul 03 · Petualangan di Lembah Data</a>
-    <a href="bagian3-modul-05.html" class="next"><small>Selanjutnya →</small>Modul 05 · Cyber-Power: Petualangan di Dunia Teknologi</a>
+    <a href="bagian3-modul-05.html" class="next"><small>Selanjutnya →</small>Modul 05</a>
   </div>
 
 </div>
@@ -109,6 +163,43 @@ function toggleTheme(){
   const isDark = el.getAttribute('data-theme') === 'dark';
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+});
+function submitQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let correct = 0;
+  questions.forEach(q=>{
+    const answer = q.getAttribute('data-answer');
+    const selected = q.querySelector('.quiz-opt.selected');
+    q.querySelectorAll('.quiz-opt').forEach(o=>{
+      o.classList.remove('correct','incorrect');
+      if(o.getAttribute('data-i') === answer){ o.classList.add('correct'); }
+      else if(o === selected){ o.classList.add('incorrect'); }
+    });
+    if(selected && selected.getAttribute('data-i') === answer){ correct++; }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const resultEl = document.getElementById('quizResult');
+  const passed = pct >= 70;
+  resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
+  document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
 </script>
 

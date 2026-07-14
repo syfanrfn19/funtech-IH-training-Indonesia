@@ -94,6 +94,60 @@
     </div>
   </div>
 
+  <div id="sec-cta" style="margin: 50px 0 20px;">
+    <span class="kicker">📝 Kuis Modul 08</span>
+    <h2>Uji Pemahaman Anda</h2>
+    <p>Jawab kelima pertanyaan berikut tentang modul ini. Anda perlu mendapat <strong>70% atau lebih</strong> (minimal 4 dari 5 benar) untuk melanjutkan.</p>
+  </div>
+
+  <div class="quiz-box" id="quiz">
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">1. Fungsi utama modul penutup ini secara emosional adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Menguji anak seketat mungkin</div>
+        <div class="quiz-opt" data-i="1">Memberi rasa pencapaian besar dan bukti nyata dari perjalanan 7 modul sebelumnya</div>
+        <div class="quiz-opt" data-i="2">Memperkenalkan topik yang sama sekali baru</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">2. "Maraton Pemrograman: Perjalanan Melalui Kode" berfungsi sebagai...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Pengantar konsep baru</div>
+        <div class="quiz-opt" data-i="1">Tinjauan besar/pengulangan materi coding dari modul-modul sebelumnya</div>
+        <div class="quiz-opt" data-i="2">Ujian akhir bergaya formal</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="1">
+      <p class="qtext">3. Sikap tutor yang tepat di sesi terakhir modul ini adalah...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Fokus mengevaluasi kekurangan anak</div>
+        <div class="quiz-opt" data-i="1">Merayakan pencapaian, bukan menguji</div>
+        <div class="quiz-opt" data-i="2">Memberi banyak materi baru sekaligus</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">4. Portofolio digital yang dikumpulkan di modul ini sebaiknya berisi...</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Karya-karya terbaik anak dari sepanjang kursus</div>
+        <div class="quiz-opt" data-i="1">Hanya nilai kuis tiap modul</div>
+        <div class="quiz-opt" data-i="2">Dokumen teknis instalasi software</div>
+      </div>
+    </div>
+    <div class="quiz-q" data-answer="0">
+      <p class="qtext">5. Kenapa pujian di sesi terakhir harus spesifik menyebut pencapaian nyata, bukan sekadar "selamat sudah lulus"?</p>
+      <div class="quiz-opts">
+        <div class="quiz-opt" data-i="0">Karena pujian spesifik membangun kepercayaan diri dan mengakui usaha nyata anak sepanjang kursus</div>
+        <div class="quiz-opt" data-i="1">Karena pujian umum lebih sopan</div>
+        <div class="quiz-opt" data-i="2">Tidak ada bedanya</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="submitQuiz()" id="submitBtn">Kirim Jawaban</button>
+    <div id="quizResult"></div>
+    <div id="nextLink" style="margin-top:18px; display:none;">
+      <a href="age-friendly-test.html" class="btn btn-pink">Lanjut ke Age-Friendly Test →</a>
+    </div>
+  </div>
+
   <div class="prevnext">
     <a href="bagian3-modul-07.html"><small>← Sebelumnya</small>Modul 07 · Cyber-Creators: Cerita, Musik, dan Desain</a>
     <a href="age-friendly-test.html" class="next"><small>Selanjutnya →</small>Age-Friendly Test</a>
@@ -109,6 +163,43 @@ function toggleTheme(){
   const isDark = el.getAttribute('data-theme') === 'dark';
   el.setAttribute('data-theme', isDark ? 'light' : 'dark');
   document.querySelector('.theme-toggle').textContent = isDark ? '🌙' : '☀️';
+}
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  const opts = q.querySelector('.quiz-opts');
+  const children = Array.from(opts.children);
+  for (let i = children.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [children[i], children[j]] = [children[j], children[i]];
+  }
+  children.forEach(c => opts.appendChild(c));
+});
+document.querySelectorAll('.quiz-q').forEach(q=>{
+  q.querySelectorAll('.quiz-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      q.querySelectorAll('.quiz-opt').forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+    });
+  });
+});
+function submitQuiz(){
+  const questions = document.querySelectorAll('.quiz-q');
+  let correct = 0;
+  questions.forEach(q=>{
+    const answer = q.getAttribute('data-answer');
+    const selected = q.querySelector('.quiz-opt.selected');
+    q.querySelectorAll('.quiz-opt').forEach(o=>{
+      o.classList.remove('correct','incorrect');
+      if(o.getAttribute('data-i') === answer){ o.classList.add('correct'); }
+      else if(o === selected){ o.classList.add('incorrect'); }
+    });
+    if(selected && selected.getAttribute('data-i') === answer){ correct++; }
+  });
+  const total = questions.length;
+  const pct = Math.round((correct/total)*100);
+  const resultEl = document.getElementById('quizResult');
+  const passed = pct >= 70;
+  resultEl.innerHTML = `<p class="quiz-result ${passed ? 'pass':'fail'}">Skor Anda: ${correct}/${total} (${pct}%) — ${passed ? '🎉 Lulus!' : 'Belum lulus. Tinjau kembali materi lalu coba lagi.'}</p>`;
+  document.getElementById('nextLink').style.display = passed ? 'block' : 'none';
 }
 </script>
 
